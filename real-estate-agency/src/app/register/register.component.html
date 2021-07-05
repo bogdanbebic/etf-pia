@@ -1,1 +1,56 @@
-<p>register works!</p>
+<div class="center">
+  <mat-form-field appearance="fill">
+    <mat-label>Firstname</mat-label>
+    <input [(ngModel)]="firstname" matInput required>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>Lastname</mat-label>
+    <input [(ngModel)]="lastname" matInput required>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>Username</mat-label>
+    <input [(ngModel)]="username" matInput required>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input [(ngModel)]="password" matInput required type="password">
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input [(ngModel)]="email" matInput required email type="email">
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>City</mat-label>
+    <input [(ngModel)]="city" matInput required>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>Country</mat-label>
+    <input [(ngModel)]="country" matInput required>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>User role</mat-label>
+    <mat-select [(ngModel)]="role" required>
+      <mat-option [value]="registeredUserRole">
+        User
+      </mat-option>
+      <mat-option [value]="agentRole">
+        Agent
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br />
+
+  <button mat-stroked-button color="primary" (click)="register()">Register</button>
+
+  <br />
+  <br />
+  Have an account?
+  <a routerLink="/login" routerLinkActive="active">Login</a>
+</div>

@@ -1,1 +1,21 @@
-<p>login works!</p>
+<div class="center">
+  <mat-form-field appearance="fill">
+    <mat-label>Username</mat-label>
+    <input [(ngModel)]="username" matInput>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input [(ngModel)]="password" matInput type="password">
+  </mat-form-field>
+  <mat-error *ngIf="invalidCredentials">
+    Invalid credentials
+  </mat-error>
+  <br />
+  <button mat-stroked-button color="primary" (click)="login()">Login</button>
+
+  <br />
+  <br />
+  Don't have an account?
+  <a routerLink="/register" routerLinkActive="active">Register</a>
+</div>
