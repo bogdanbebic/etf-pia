@@ -34,6 +34,29 @@ router.route('/login').post((req, res) => {
     });
 });
 
+router.route('/register').post((req, res) => {
+    let newUser = {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+        city: req.body.city,
+        country: req.body.country,
+        role: req.body.role,
+    };
+
+    userModel.insertMany(newUser, (err, user) => {
+        if (err) {
+            console.log(err);
+            res.json({ ok: false });
+            return;
+        }
+
+        res.json({ ok: true });
+    });
+});
+
 router.route('/allUsers').post((req, res) => {
     userModel.find({}, (err, users) => {
         if (err) {
