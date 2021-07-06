@@ -49,14 +49,26 @@ router.route('/register').post((req, res) => {
         active: false,
     };
 
-    userModel.insertMany(newUser, (err, user) => {
+    userModel.findOne({'username': newUser.username}, (err, user) => {
         if (err) {
             console.log(err);
             res.json({ ok: false });
             return;
         }
+        if (user) {
+            res.json({ ok: false });
+            return;
+        }
 
-        res.json({ ok: true });
+        userModel.collection.insertOne(newUser, (err, user) => {
+            if (err) {
+                console.log(err);
+                res.json({ ok: false });
+                return;
+            }
+
+            res.json({ ok: true });
+        });
     });
 });
 
