@@ -9,6 +9,8 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+mongoose.set('debug', true);
+
 const connectionString = 'mongodb://localhost:27017/real-estate-agency';
 
 mongoose.connect(connectionString);
