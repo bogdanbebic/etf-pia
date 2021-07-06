@@ -9,12 +9,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MaterialModule } from './material/material.module';
+import { SearchComponent } from './search/search.component';
+import { PromotedComponent } from './promoted/promoted.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    SearchComponent,
+    PromotedComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,
