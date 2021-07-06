@@ -49,7 +49,7 @@ router.route('/register').post((req, res) => {
         active: false,
     };
 
-    userModel.findOne({'username': newUser.username}, (err, user) => {
+    userModel.findOne({ $or: [{'username': newUser.username}, {'email': newUser.email}]}, (err, user) => {
         if (err) {
             console.log(err);
             res.json({ ok: false });
