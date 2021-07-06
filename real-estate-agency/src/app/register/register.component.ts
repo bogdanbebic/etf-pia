@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BackendReturnCode } from '../backend-return-code';
 import { UserRoles } from '../user-roles.enum';
+import { UsersService } from '../users.service';
 
 
 @Component({
@@ -22,15 +24,37 @@ export class RegisterComponent implements OnInit {
   country: string;
   role: UserRoles;
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(
+    private snackBar: MatSnackBar,
+    private usersService: UsersService
+    ) { }
 
   ngOnInit(): void {
   }
 
   register() {
-    // TODO: implement
-    this.snackBar.open("Registration success!", "OK", {
-      duration: 2000
+    const newUserData = {
+      firstname: this.firstname,
+      lastname: this.lastname,
+      username: this.username,
+      password: this.password,
+      email: this.email,
+      city: this.city,
+      country: this.country,
+      role: this.role,
+    };
+
+    this.usersService.register(newUserData).subscribe((returnCode: BackendReturnCode) => {
+      if (returnCode.ok) {
+        this.snackBar.open("Registration success!", "OK", {
+          duration: 2000
+        });
+      }
+      else {
+        this.snackBar.open("Registration failed!", "OK", {
+          duration: 2000
+        });
+      }
     });
   }
 
