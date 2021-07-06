@@ -26,6 +26,7 @@ router.route('/login').post((req, res) => {
     userModel.findOne({'username': username, 'password': password}, 'username role', (err, user) => {
         if (err) {
             console.log(err);
+            res.json(null);
             return;
         }
 
@@ -37,6 +38,7 @@ router.route('/allUsers').post((req, res) => {
     userModel.find({}, (err, users) => {
         if (err) {
             console.log(err);
+            res.json(null);
             return;
         }
 
