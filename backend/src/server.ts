@@ -23,7 +23,7 @@ const router = express.Router();
 router.route('/login').post((req, res) => {
     let username = req.body.username;
     let password = req.body.password;
-    userModel.findOne({'username': username, 'password': password}, 'username role', (err, user) => {
+    userModel.findOne({'username': username, 'password': password, active: true}, 'username role', (err, user) => {
         if (err) {
             console.log(err);
             res.json(null);
@@ -44,6 +44,7 @@ router.route('/register').post((req, res) => {
         city: req.body.city,
         country: req.body.country,
         role: req.body.role,
+        active: false,
     };
 
     userModel.insertMany(newUser, (err, user) => {

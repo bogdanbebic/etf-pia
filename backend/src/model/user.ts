@@ -26,7 +26,10 @@ let User = new Schema({
     },
     role: {
         type: Number
-    }
-})
+    },
+    active: {
+        type: Boolean
+    },
+});
 
 export default mongoose.model('Users', User, 'users');
