@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthorizationService } from '../authorization.service';
+import { LoggedInUser } from '../logged-in-user';
 
 @Component({
   selector: 'app-login',
@@ -12,14 +14,21 @@ export class LoginComponent implements OnInit {
 
   invalidCredentials = false;
 
-  constructor() { }
+  constructor(private authorizationService: AuthorizationService) { }
 
   ngOnInit(): void {
   }
 
   login() {
-    // TODO: implement
-    this.invalidCredentials = true;
+    this.authorizationService.login(this.username, this.password).subscribe((user: LoggedInUser) => {
+      console.log(user);
+      if (!user) {
+        this.invalidCredentials = true;
+        return;
+      }
+
+      // TODO: redirect
+    });
   }
 
 }
