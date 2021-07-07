@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
+  searchQuery: string;
+  priceRangeMin: number;
+  priceRangeMax: number;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  search() {
+    // TODO: implement
   }
 
 }
