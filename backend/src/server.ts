@@ -3,6 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import userModel from './model/user';
+import realEstateModel from './model/real-estate';
 
 const app = express();
 
@@ -81,6 +82,38 @@ router.route('/allUsers').post((req, res) => {
         }
 
         res.json(users);
+    });
+});
+
+router.route('/promoted').post((req, res) => {
+    realEstateModel.find({'promoted': true}, (err, realEstates) => {
+        if (err) {
+            console.log(err);
+            res.json(null);
+            return;
+        }
+
+        res.json(realEstates);
+    });
+});
+
+router.route('/search').post((req, res) => {
+    const nameQuery = req.body.nameQuery;
+    const priceLow = req.body.priceLow;
+    const priceHigh = req.body.priceHigh;
+    const priceFilter = { $and: [
+        { 'price': { $gte: priceLow } },
+        { 'price': { $lte: priceHigh } }
+    ]};
+
+    realEstateModel.find(priceFilter, (err, realEstates) => {
+        if (err) {
+            console.log(err);
+            res.json(null);
+            return;
+        }
+
+        res.json(realEstates.filter((element: any) => element.description.includes(nameQuery)));
     });
 });
 
