@@ -1,0 +1,31 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="account icon">
+  <mat-icon>account_circle</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <div *ngIf="!isUserLoggedIn">
+    <a mat-menu-item routerLink="/login" routerLinkActive="active">
+      <mat-icon>login</mat-icon>
+      <span>Login</span>
+    </a>
+    <a mat-menu-item routerLink="/register" routerLinkActive="active">
+      <mat-icon>app_registration</mat-icon>
+      <span>Register</span>
+    </a>
+  </div>
+  <div *ngIf="isUserLoggedIn">
+    <div *ngIf="isUser">
+      user
+    </div>
+    <div *ngIf="isAgent">
+      agent
+    </div>
+    <div *ngIf="isAdmin">
+      admin
+    </div>
+
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </div>
+</mat-menu>

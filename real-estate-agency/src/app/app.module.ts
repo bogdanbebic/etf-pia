@@ -12,6 +12,7 @@ import { MaterialModule } from './material/material.module';
 import { SearchComponent } from './search/search.component';
 import { PromotedComponent } from './promoted/promoted.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { AccountMenuComponent } from './account-menu/account-menu.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     RegisterComponent,
     SearchComponent,
     PromotedComponent,
-    HomepageComponent
+    HomepageComponent,
+    AccountMenuComponent
   ],
   imports: [
     BrowserModule,
