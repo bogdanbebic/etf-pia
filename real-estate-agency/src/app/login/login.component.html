@@ -1,18 +1,23 @@
 <div class="center">
   <mat-form-field appearance="fill">
     <mat-label>Username</mat-label>
+    <mat-icon matSuffix>account_box</mat-icon>
     <input [(ngModel)]="username" matInput>
   </mat-form-field>
   <br />
   <mat-form-field appearance="fill">
     <mat-label>Password</mat-label>
+    <mat-icon matSuffix>password</mat-icon>
     <input [(ngModel)]="password" matInput type="password">
   </mat-form-field>
   <mat-error *ngIf="invalidCredentials">
     Invalid credentials
   </mat-error>
   <br />
-  <button mat-stroked-button color="primary" (click)="login()">Login</button>
+  <button mat-stroked-button color="primary" (click)="login()">
+    <mat-icon>login</mat-icon>
+    <span>Login</span>
+  </button>
 
   <br />
   <br />
