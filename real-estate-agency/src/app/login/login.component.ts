@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthorizationService } from '../authorization.service';
 import { LoggedInUser } from '../logged-in-user';
 
@@ -14,7 +15,10 @@ export class LoginComponent implements OnInit {
 
   invalidCredentials = false;
 
-  constructor(private authorizationService: AuthorizationService) { }
+  constructor(
+    private authorizationService: AuthorizationService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -27,7 +31,7 @@ export class LoginComponent implements OnInit {
         return;
       }
 
-      // TODO: redirect
+      this.router.navigate(['/']);
     });
   }
 
