@@ -1,3 +1,27 @@
 <mat-card>
-  Real Estate
+  <mat-card-content>
+    <mat-list dense>
+      <mat-list-item>
+        <mat-icon matListIcon>place</mat-icon>
+        <!-- TODO: address - municipality, city -->
+        <span>Beograd, Zvezdara</span>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon matListIcon>euro</mat-icon>
+        <span>{{ realEstateInfo.price }}</span>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon matListIcon>maps_home_work</mat-icon>
+        <span *ngIf="realEstateInfo.ishouse">House with {{ realEstateInfo.numrooms }} rooms</span>
+        <span *ngIf="!realEstateInfo.ishouse">Apartment with {{ realEstateInfo.numrooms }} rooms</span>
+      </mat-list-item>
+      <mat-list-item>
+        <span>Size: {{ realEstateInfo.size }} square meters</span>
+      </mat-list-item>
+      <mat-list-item>
+        <span *ngIf="realEstateInfo.renting">For rent</span>
+        <span *ngIf="!realEstateInfo.renting">For sale</span>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
 </mat-card>
