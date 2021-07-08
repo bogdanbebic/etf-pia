@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RealEstateCardInfo } from '../real-estate-card-info';
+import { RealEstateService } from '../real-estate.service';
 
 @Component({
   selector: 'app-search',
@@ -11,13 +13,20 @@ export class SearchComponent implements OnInit {
   priceRangeMin: number;
   priceRangeMax: number;
 
-  constructor() { }
+  searchResults: RealEstateCardInfo[]
+
+  constructor(
+    private realEstateService: RealEstateService
+  ) { }
 
   ngOnInit(): void {
   }
 
   search() {
-    // TODO: implement
+    this.realEstateService.search(this.searchQuery, this.priceRangeMin, this.priceRangeMax)
+      .subscribe((realEstates: RealEstateCardInfo[]) => {
+        this.searchResults = realEstates;
+      });
   }
 
 }
