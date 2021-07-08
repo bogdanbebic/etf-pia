@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { RealEstateCardInfo } from '../real-estate-card-info';
 
 @Component({
   selector: 'app-real-estate-card',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./real-estate-card.component.css']
 })
 export class RealEstateCardComponent implements OnInit {
+
+  @Input() realEstateInfo: RealEstateCardInfo;
 
   constructor() { }
 

@@ -18,3 +18,12 @@
   <mat-icon>search</mat-icon>
   <span>Search</span>
 </button>
+
+<br />
+<br />
+
+<mat-grid-list cols="4">
+  <mat-grid-tile *ngFor="let result of searchResults">
+    <app-real-estate-card [realEstateInfo]="result"></app-real-estate-card>
+  </mat-grid-tile>
+</mat-grid-list>
