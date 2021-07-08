@@ -13,6 +13,7 @@ import { SearchComponent } from './search/search.component';
 import { PromotedComponent } from './promoted/promoted.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AccountMenuComponent } from './account-menu/account-menu.component';
+import { RealEstateCardComponent } from './real-estate-card/real-estate-card.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AccountMenuComponent } from './account-menu/account-menu.component';
     SearchComponent,
     PromotedComponent,
     HomepageComponent,
-    AccountMenuComponent
+    AccountMenuComponent,
+    RealEstateCardComponent
   ],
   imports: [
     BrowserModule,
