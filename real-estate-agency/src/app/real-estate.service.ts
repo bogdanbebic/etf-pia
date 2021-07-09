@@ -12,6 +12,18 @@ export class RealEstateService {
     return this.http.post(`${this.uri}/promoted`, null);
   }
 
+  getUnapproved() {
+    return this.http.post(`${this.uri}/unapproved`, null);
+  }
+
+  approveRealEstate(id) {
+    return this.http.post(`${this.uri}/real-estate-approve`, { _id: id });
+  }
+
+  rejectRealEstate(id) {
+    return this.http.post(`${this.uri}/real-estate-reject`, { _id: id });
+  }
+
   search(nameQuery: string, priceLow: number, priceHigh: number) {
     const body = {
       nameQuery: nameQuery,
