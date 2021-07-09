@@ -73,6 +73,18 @@ router.route('/register').post((req, res) => {
     });
 });
 
+router.route('/registration-accept').post((req, res) => {
+    const username = req.body.username;
+    userModel.collection.updateOne({ 'username': username, 'active': false }, { $set: { 'active': true } });
+    res.json({ ok: true });
+});
+
+router.route('/registration-reject').post((req, res) => {
+    const username = req.body.username;
+    userModel.collection.deleteOne({ 'username': username, 'active': false });
+    res.json({ ok: true });
+});
+
 router.route('/allUsers').post((req, res) => {
     userModel.find({}, '-password', (err, users) => {
         if (err) {
