@@ -48,6 +48,17 @@ export class AuthorizationService {
       !this.currentUser && roles.includes(UserRoles.Unregistered);
   }
 
+  changePassword(passwordOld: string, password: string, passwordRepeat: string) {
+    const bodyData = {
+      username: this.currentUser.username,
+      passwordOld: passwordOld,
+      password: password,
+      passwordRepeat: passwordRepeat,
+    };
+
+    return this.http.post(`${this.uri}/change-password`, bodyData);
+  }
+
   constructor(
     private http: HttpClient,
     private router: Router
