@@ -17,10 +17,14 @@ import { UsersListComponent } from './users-list/users-list.component';
 
 const routes: Routes = [
   {
-    path: 'login', component: LoginComponent
+    path: 'login', component: LoginComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [UserRoles.Unregistered] }
   },
   {
-    path: 'register', component: RegisterComponent
+    path: 'register', component: RegisterComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [UserRoles.Unregistered] }
   },
   {
     path: 'profile', component: AccountSettingsComponent,
@@ -68,7 +72,9 @@ const routes: Routes = [
     data: { roles: [UserRoles.Admin] }
   },
   {
-    path: '', component: HomepageComponent
+    path: '', component: HomepageComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [UserRoles.Unregistered, UserRoles.Registered, UserRoles.Agent, UserRoles.Admin] }
   },
   {
     path: '**', redirectTo: '/'

@@ -22,6 +22,7 @@ export class AuthorizationService {
 
     currentUserSubject.subscribe((user: LoggedInUser) => {
       this.currentUser = user;
+      localStorage.setItem('user', JSON.stringify(this.currentUser));
       if (user)
         this.currentUserRoleSubject.next(user.role);
     });
@@ -31,11 +32,18 @@ export class AuthorizationService {
 
   logout() {
     this.currentUser = null;
+    localStorage.removeItem('user');
     this.currentUserRoleSubject.next(UserRoles.Unregistered);
   }
 
   isAuthenticated(roles: UserRoles[]): boolean {
-    return this.currentUser && roles.includes(this.currentUser.role);
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      this.currentUser = user;
+      this.currentUserRoleSubject.next(user.role);
+    }
+    return this.currentUser && roles.includes(this.currentUser.role) ||
+      !this.currentUser && roles.includes(UserRoles.Unregistered);
   }
 
   constructor(private http: HttpClient) { }
