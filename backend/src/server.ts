@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
+import mongoose, { mongo } from 'mongoose';
 import userModel from './model/user';
 import realEstateModel from './model/real-estate';
 
@@ -125,6 +125,18 @@ router.route('/unapproved').post((req, res) => {
 
         res.json(realEstates);
     });
+});
+
+router.route('/real-estate-approve').post((req, res) => {
+    const id = new mongoose.mongo.ObjectId(req.body._id);
+    realEstateModel.collection.updateOne({ _id: id, 'active': false }, { $set: { 'active': true } });
+    res.json({ ok: true });
+});
+
+router.route('/real-estate-reject').post((req, res) => {
+    const id = new mongoose.mongo.ObjectId(req.body._id);
+    realEstateModel.collection.deleteOne({ _id: id, 'active': false });
+    res.json({ ok: true });
 });
 
 router.route('/search').post((req, res) => {
