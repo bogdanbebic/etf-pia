@@ -85,6 +85,12 @@ router.route('/registration-reject').post((req, res) => {
     res.json({ ok: true });
 });
 
+router.route('/user-delete').post((req, res) => {
+    const username = req.body.username;
+    userModel.collection.deleteOne({ 'username': username, 'active': true });
+    res.json({ ok: true });
+});
+
 router.route('/allUsers').post((req, res) => {
     userModel.find({}, '-password', (err, users) => {
         if (err) {
