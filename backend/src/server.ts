@@ -22,7 +22,6 @@ conn.once('open', () => {
 
 const router = express.Router();
 
-// TODO: routes
 router.route('/login').post((req, res) => {
     let username = req.body.username;
     let password = req.body.password;

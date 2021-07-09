@@ -12,8 +12,4 @@ export class AccountMenuUserComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  listMyRealEstates() {
-    // TODO: implement
-  }
-
 }
