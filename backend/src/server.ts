@@ -74,7 +74,7 @@ router.route('/register').post((req, res) => {
 });
 
 router.route('/allUsers').post((req, res) => {
-    userModel.find({}, (err, users) => {
+    userModel.find({}, '-password', (err, users) => {
         if (err) {
             console.log(err);
             res.json(null);
