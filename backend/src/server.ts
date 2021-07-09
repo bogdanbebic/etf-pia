@@ -109,6 +109,18 @@ router.route('/promoted').post((req, res) => {
     });
 });
 
+router.route('/unapproved').post((req, res) => {
+    realEstateModel.find({'active': false}, (err, realEstates) => {
+        if (err) {
+            console.log(err);
+            res.json(null);
+            return;
+        }
+
+        res.json(realEstates);
+    });
+});
+
 router.route('/search').post((req, res) => {
     const nameQuery = req.body.nameQuery;
     const priceLow = req.body.priceLow;
