@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { LoggedInUser } from './logged-in-user';
 import { UserRoles } from './user-roles.enum';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,7 @@ export class AuthorizationService {
     this.currentUser = null;
     localStorage.removeItem('user');
     this.currentUserRoleSubject.next(UserRoles.Unregistered);
+    this.router.navigate(['/']);
   }
 
   isAuthenticated(roles: UserRoles[]): boolean {
@@ -46,5 +48,8 @@ export class AuthorizationService {
       !this.currentUser && roles.includes(UserRoles.Unregistered);
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
 }
