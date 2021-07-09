@@ -15,12 +15,15 @@
   <div *ngIf="isUserLoggedIn">
     <div *ngIf="isUser">
       user
+      <app-account-menu-user></app-account-menu-user>
     </div>
     <div *ngIf="isAgent">
       agent
+      <app-account-menu-agent></app-account-menu-agent>
     </div>
     <div *ngIf="isAdmin">
       admin
+      <app-account-menu-admin></app-account-menu-admin>
     </div>
 
     <a mat-menu-item routerLink="/profile" routerLinkActive="active">

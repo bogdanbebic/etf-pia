@@ -14,6 +14,9 @@ import { PromotedComponent } from './promoted/promoted.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AccountMenuComponent } from './account-menu/account-menu.component';
 import { RealEstateCardComponent } from './real-estate-card/real-estate-card.component';
+import { AccountMenuUserComponent } from './account-menu-user/account-menu-user.component';
+import { AccountMenuAgentComponent } from './account-menu-agent/account-menu-agent.component';
+import { AccountMenuAdminComponent } from './account-menu-admin/account-menu-admin.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { RealEstateCardComponent } from './real-estate-card/real-estate-card.com
     PromotedComponent,
     HomepageComponent,
     AccountMenuComponent,
-    RealEstateCardComponent
+    RealEstateCardComponent,
+    AccountMenuUserComponent,
+    AccountMenuAgentComponent,
+    AccountMenuAdminComponent
   ],
   imports: [
     BrowserModule,
