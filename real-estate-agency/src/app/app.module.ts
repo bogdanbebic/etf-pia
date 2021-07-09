@@ -17,6 +17,15 @@ import { RealEstateCardComponent } from './real-estate-card/real-estate-card.com
 import { AccountMenuUserComponent } from './account-menu-user/account-menu-user.component';
 import { AccountMenuAgentComponent } from './account-menu-agent/account-menu-agent.component';
 import { AccountMenuAdminComponent } from './account-menu-admin/account-menu-admin.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
+import { RealEstatesListComponent } from './real-estates-list/real-estates-list.component';
+import { RealEstatesPromotedComponent } from './real-estates-promoted/real-estates-promoted.component';
+import { RealEstatesUnapprovedComponent } from './real-estates-unapproved/real-estates-unapproved.component';
+import { RealEstatesNewComponent } from './real-estates-new/real-estates-new.component';
+import { UsersListComponent } from './users-list/users-list.component';
+import { RealEstatesMyListComponent } from './real-estates-my-list/real-estates-my-list.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +39,16 @@ import { AccountMenuAdminComponent } from './account-menu-admin/account-menu-adm
     RealEstateCardComponent,
     AccountMenuUserComponent,
     AccountMenuAgentComponent,
-    AccountMenuAdminComponent
+    AccountMenuAdminComponent,
+    DashboardComponent,
+    DashboardAdminComponent,
+    RealEstatesListComponent,
+    RealEstatesPromotedComponent,
+    RealEstatesUnapprovedComponent,
+    RealEstatesNewComponent,
+    UsersListComponent,
+    RealEstatesMyListComponent,
+    AccountSettingsComponent
   ],
   imports: [
     BrowserModule,
