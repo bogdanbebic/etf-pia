@@ -52,6 +52,12 @@ router.route('/register').post((req, res) => {
         active: false,
     };
 
+    const passwordRepeat = req.body.passwordRepeat;
+    if (!checkNewPassword(newUser.password, passwordRepeat)) {
+        res.json({ ok: false });
+        return;
+    }
+
     userModel.findOne({ $or: [{ 'username': newUser.username }, { 'email': newUser.email }] }, (err, user) => {
         if (err) {
             console.log(err);

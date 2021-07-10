@@ -20,6 +20,11 @@
   </mat-form-field>
   <br />
   <mat-form-field appearance="fill">
+    <mat-label>Repeat Password</mat-label>
+    <input [(ngModel)]="passwordRepeat" matInput required type="password">
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
     <mat-label>Email</mat-label>
     <input [(ngModel)]="email" matInput required email type="email">
   </mat-form-field>
