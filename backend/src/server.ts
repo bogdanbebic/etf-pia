@@ -146,12 +146,21 @@ router.route('/search').post((req, res) => {
     const nameQuery = req.body.nameQuery;
     const priceLow = req.body.priceLow;
     const priceHigh = req.body.priceHigh;
-    const priceFilter = { $and: [
-        { 'price': { $gte: priceLow } },
-        { 'price': { $lte: priceHigh } }
-    ]};
+    let priceFilter = {};
+    if (priceLow && priceHigh) {
+        priceFilter = { $and: [
+            { 'price': { $gte: priceLow } },
+            { 'price': { $lte: priceHigh } }
+        ]};
+    }
+    else if (priceLow) {
+        priceFilter = { 'price': { $gte: priceLow } };
+    }
+    else if (priceHigh) {
+        priceFilter = { 'price': { $lte: priceHigh } };
+    }
 
-    realEstateModel.find(priceFilter, (err, realEstates) => {
+    realEstateModel.find({ 'active': true, ...priceFilter }, (err, realEstates) => {
         if (err) {
             console.log(err);
             res.json(null);
