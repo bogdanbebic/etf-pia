@@ -16,6 +16,14 @@ export class RealEstateService {
     return this.http.post(`${this.uri}/unapproved`, null);
   }
 
+  addToPromoted(id) {
+    return this.http.post(`${this.uri}/real-estate-promoted-add`, { _id: id });
+  }
+
+  removeFromPromoted(id) {
+    return this.http.post(`${this.uri}/real-estate-promoted-remove`, { _id: id });
+  }
+
   approveRealEstate(id) {
     return this.http.post(`${this.uri}/real-estate-approve`, { _id: id });
   }

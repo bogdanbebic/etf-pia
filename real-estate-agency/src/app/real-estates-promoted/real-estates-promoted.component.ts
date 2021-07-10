@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RealEstateService } from '../real-estate.service';
 
 @Component({
   selector: 'app-real-estates-promoted',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RealEstatesPromotedComponent implements OnInit {
 
-  constructor() { }
+  displayedColumns: string[] = ['description', 'ishouse', 'size', 'owner', 'renting', 'remove' ];
+  dataSource: any;
+
+  constructor(
+    private realEstateService: RealEstateService
+  ) { }
 
   ngOnInit(): void {
+    this.getPromoted();
+  }
+
+  getPromoted() {
+    this.realEstateService.getPromoted().subscribe(promoted => {
+      this.dataSource = promoted;
+    });
+  }
+
+  removeFromPromoted(id) {
+    this.realEstateService.removeFromPromoted(id).subscribe(ok => {
+      this.getPromoted();
+    });
   }
 
 }
