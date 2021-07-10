@@ -28,7 +28,7 @@ const router = express.Router();
 router.route('/login').post((req, res) => {
     let username = req.body.username;
     let password = req.body.password;
-    userModel.findOne({'username': username, 'password': password, active: true}, 'username role', (err, user) => {
+    userModel.findOne({ 'username': username, 'password': password, active: true }, 'username role', (err, user) => {
         if (err) {
             console.log(err);
             res.json(null);
@@ -52,7 +52,7 @@ router.route('/register').post((req, res) => {
         active: false,
     };
 
-    userModel.findOne({ $or: [{'username': newUser.username}, {'email': newUser.email}]}, (err, user) => {
+    userModel.findOne({ $or: [{ 'username': newUser.username }, { 'email': newUser.email }] }, (err, user) => {
         if (err) {
             console.log(err);
             res.json({ ok: false });
@@ -144,7 +144,7 @@ router.route('/real-estates-list').post((req, res) => {
 
 router.route('/owned').post((req, res) => {
     const username = req.body.username;
-    realEstateModel.find({'owner': username}, (err, realEstates) => {
+    realEstateModel.find({ 'owner': username }, (err, realEstates) => {
         if (err) {
             console.log(err);
             res.json(null);
@@ -156,7 +156,7 @@ router.route('/owned').post((req, res) => {
 });
 
 router.route('/promoted').post((req, res) => {
-    realEstateModel.find({'promoted': true}, (err, realEstates) => {
+    realEstateModel.find({ 'promoted': true }, (err, realEstates) => {
         if (err) {
             console.log(err);
             res.json(null);
@@ -168,7 +168,7 @@ router.route('/promoted').post((req, res) => {
 });
 
 router.route('/unapproved').post((req, res) => {
-    realEstateModel.find({'active': false}, (err, realEstates) => {
+    realEstateModel.find({ 'active': false }, (err, realEstates) => {
         if (err) {
             console.log(err);
             res.json(null);
@@ -209,10 +209,12 @@ router.route('/search').post((req, res) => {
     const priceHigh = req.body.priceHigh;
     let priceFilter = {};
     if (priceLow && priceHigh) {
-        priceFilter = { $and: [
-            { 'price': { $gte: priceLow } },
-            { 'price': { $lte: priceHigh } }
-        ]};
+        priceFilter = {
+            $and: [
+                { 'price': { $gte: priceLow } },
+                { 'price': { $lte: priceHigh } }
+            ]
+        };
     }
     else if (priceLow) {
         priceFilter = { 'price': { $gte: priceLow } };
