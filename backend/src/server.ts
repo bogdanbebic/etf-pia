@@ -142,6 +142,19 @@ router.route('/real-estates-list').post((req, res) => {
     });
 });
 
+router.route('/owned').post((req, res) => {
+    const username = req.body.username;
+    realEstateModel.find({'owner': username}, (err, realEstates) => {
+        if (err) {
+            console.log(err);
+            res.json(null);
+            return;
+        }
+
+        res.json(realEstates);
+    });
+});
+
 router.route('/promoted').post((req, res) => {
     realEstateModel.find({'promoted': true}, (err, realEstates) => {
         if (err) {
