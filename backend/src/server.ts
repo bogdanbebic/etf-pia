@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import mongoose, { mongo } from 'mongoose';
 import userModel from './model/user';
 import realEstateModel from './model/real-estate';
+import { checkNewPassword } from './password-utils';
 
 const app = express();
 
@@ -84,6 +85,29 @@ router.route('/registration-reject').post((req, res) => {
     const username = req.body.username;
     userModel.collection.deleteOne({ 'username': username, 'active': false });
     res.json({ ok: true });
+});
+
+router.route('/password-change').post((req, res) => {
+    const username = req.body.username;
+    const passwordOld = req.body.passwordOld;
+    const password = req.body.password;
+    const passwordRepeat = req.body.passwordRepeat;
+
+    if (!checkNewPassword(password, passwordRepeat)) {
+        res.json({ ok: false });
+        return;
+    }
+
+    const filter = { 'username': username, 'password': passwordOld, 'active': true };
+    userModel.collection.updateOne(filter, { $set: { 'password': password } }, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.json({ ok: false });
+            return;
+        }
+
+        res.json({ ok: result.modifiedCount > 0 });
+    });
 });
 
 router.route('/user-delete').post((req, res) => {
