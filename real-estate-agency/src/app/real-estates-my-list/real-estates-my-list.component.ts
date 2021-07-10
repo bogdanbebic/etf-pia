@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthorizationService } from '../authorization.service';
+import { RealEstateService } from '../real-estate.service';
 
 @Component({
   selector: 'app-real-estates-my-list',
@@ -7,9 +9,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RealEstatesMyListComponent implements OnInit {
 
-  constructor() { }
+  displayedColumns: string[] = [
+    'description',
+    'ishouse',
+    'size',
+    'furnished',
+    'renting',
+    'price',
+    'promoted',
+    'active',
+  ];
+  dataSource: any;
+
+  constructor(
+    private realEstateService: RealEstateService,
+    private authorizationService: AuthorizationService
+  ) { }
 
   ngOnInit(): void {
+    this.getOwned();
+  }
+
+  getOwned() {
+    const username = this.authorizationService.currentUser.username;
+    this.realEstateService.getOwned(username).subscribe(owned => {
+      this.dataSource = owned;
+    });
   }
 
 }

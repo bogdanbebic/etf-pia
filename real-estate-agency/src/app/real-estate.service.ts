@@ -12,6 +12,10 @@ export class RealEstateService {
     return this.http.post(`${this.uri}/real-estates-list`, null);
   }
 
+  getOwned(username: string) {
+    return this.http.post(`${this.uri}/owned`, { username: username });
+  }
+
   getPromoted() {
     return this.http.post(`${this.uri}/promoted`, null);
   }
