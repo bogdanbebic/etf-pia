@@ -56,7 +56,7 @@ export class AuthorizationService {
       passwordRepeat: passwordRepeat,
     };
 
-    return this.http.post(`${this.uri}/change-password`, bodyData);
+    return this.http.post(`${this.uri}/password-change`, bodyData);
   }
 
   constructor(
