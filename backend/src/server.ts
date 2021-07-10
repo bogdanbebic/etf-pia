@@ -154,6 +154,18 @@ router.route('/unapproved').post((req, res) => {
     });
 });
 
+router.route('/real-estate-promoted-add').post((req, res) => {
+    const id = new mongoose.mongo.ObjectId(req.body._id);
+    realEstateModel.collection.updateOne({ _id: id, 'active': true }, { $set: { 'promoted': true } });
+    res.json({ ok: true });
+});
+
+router.route('/real-estate-promoted-remove').post((req, res) => {
+    const id = new mongoose.mongo.ObjectId(req.body._id);
+    realEstateModel.collection.updateOne({ _id: id, 'active': true }, { $set: { 'promoted': false } });
+    res.json({ ok: true });
+});
+
 router.route('/real-estate-approve').post((req, res) => {
     const id = new mongoose.mongo.ObjectId(req.body._id);
     realEstateModel.collection.updateOne({ _id: id, 'active': false }, { $set: { 'active': true } });
