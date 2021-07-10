@@ -130,6 +130,18 @@ router.route('/allUsers').post((req, res) => {
 
 // real estate routes
 
+router.route('/real-estates-list').post((req, res) => {
+    realEstateModel.find({}, (err, realEstates) => {
+        if (err) {
+            console.log(err);
+            res.json(null);
+            return;
+        }
+
+        res.json(realEstates);
+    });
+});
+
 router.route('/promoted').post((req, res) => {
     realEstateModel.find({'promoted': true}, (err, realEstates) => {
         if (err) {
