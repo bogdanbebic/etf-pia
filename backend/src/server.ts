@@ -116,6 +116,47 @@ router.route('/user-delete').post((req, res) => {
     res.json({ ok: true });
 });
 
+router.route('/user-data-change').post((req, res) => {
+    const username = req.body.username;
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
+    const city = req.body.city;
+    const country = req.body.country;
+    const update = {
+        $set: {
+            'firstname': firstname,
+            'lastname': lastname,
+            'city': city,
+            'country': country,
+        }
+    };
+
+    userModel.collection.updateOne({ 'username': username, 'active': true }, update, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.json({ ok: false });
+            return;
+        }
+
+        res.json({ ok: true });
+    });
+});
+
+router.route('/get-user').post((req, res) => {
+    const username = req.body.username;
+    const filter = { 'username': username, 'active': true };
+    const projection = 'firstname lastname city country';
+    userModel.findOne(filter, projection, (err, user) => {
+        if (err) {
+            console.log(err);
+            res.json(null);
+            return;
+        }
+
+        res.json(user);
+    });
+});
+
 router.route('/allUsers').post((req, res) => {
     userModel.find({}, '-password', (err, users) => {
         if (err) {

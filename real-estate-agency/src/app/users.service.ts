@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UserData } from './user-data';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,14 @@ export class UsersService {
 
   deleteUser(username: string) {
     return this.http.post(`${this.uri}/user-delete`, { username: username });
+  }
+
+  changeUserData(username: string, userData: UserData) {
+    return this.http.post(`${this.uri}/user-data-change`, { username: username, ...userData });
+  }
+
+  getUser(username: string) {
+    return this.http.post(`${this.uri}/get-user`, { username: username });
   }
 
   getAll() {

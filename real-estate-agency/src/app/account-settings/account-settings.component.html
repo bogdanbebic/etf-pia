@@ -1,1 +1,29 @@
 <app-password-change></app-password-change>
+
+<div *ngIf="isUser" class="center">
+  <h1>Change User Data:</h1>
+  <mat-form-field appearance="fill">
+    <mat-label>Firstname</mat-label>
+    <input [(ngModel)]="firstname" matInput required>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>Lastname</mat-label>
+    <input [(ngModel)]="lastname" matInput required>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>City</mat-label>
+    <input [(ngModel)]="city" matInput required>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>Country</mat-label>
+    <input [(ngModel)]="country" matInput required>
+  </mat-form-field>
+  <br />
+
+  <button mat-stroked-button color="primary" (click)="changeUserData()">
+    <span>Change Data</span>
+  </button>
+</div>
