@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import mongoose, { mongo } from 'mongoose';
+import mongoose from 'mongoose';
 import userModel from './model/user';
 import realEstateModel from './model/real-estate';
 import { checkNewPassword } from './password-utils';
