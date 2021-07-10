@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RealEstateService } from '../real-estate.service';
 
 @Component({
   selector: 'app-real-estates-list',
@@ -7,9 +8,55 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RealEstatesListComponent implements OnInit {
 
-  constructor() { }
+  displayedColumns: string[] = [
+    'description',
+    'ishouse',
+    'size',
+    'owner',
+    'renting',
+    'approve',
+    'reject',
+    'promote',
+    'unpromote',
+  ];
+  dataSource: any;
+
+  constructor(
+    private realEstateService: RealEstateService
+  ) { }
 
   ngOnInit(): void {
+    this.getAll();
+  }
+
+  getAll() {
+    this.realEstateService.getAll().subscribe(realEstates => {
+      this.dataSource = realEstates;
+    });
+  }
+
+  approveRealEstate(id) {
+    this.realEstateService.approveRealEstate(id).subscribe(ok => {
+      this.getAll();
+    });
+  }
+
+  rejectRealEstate(id) {
+    this.realEstateService.rejectRealEstate(id).subscribe(ok => {
+      this.getAll();
+    });
+  }
+
+  addToPromoted(id) {
+    this.realEstateService.addToPromoted(id).subscribe(ok => {
+      this.getAll();
+    });
+  }
+
+  removeFromPromoted(id) {
+    this.realEstateService.removeFromPromoted(id).subscribe(ok => {
+      this.getAll();
+    });
   }
 
 }

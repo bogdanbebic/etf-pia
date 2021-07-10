@@ -8,6 +8,10 @@ export class RealEstateService {
 
   uri = 'http://localhost:4000';
 
+  getAll() {
+    return this.http.post(`${this.uri}/real-estates-list`, null);
+  }
+
   getPromoted() {
     return this.http.post(`${this.uri}/promoted`, null);
   }
