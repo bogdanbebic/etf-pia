@@ -320,7 +320,7 @@ router.route('/search').post((req, res) => {
             return;
         }
 
-        res.json(realEstates.filter((element: any) => element.description.includes(nameQuery)));
+        res.json(realEstates.filter((element: any) => element.city.includes(nameQuery)));
     });
 });
 

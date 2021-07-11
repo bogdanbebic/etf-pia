@@ -6,7 +6,18 @@ let RealEstate = new Schema({
     description: {
         type: String
     },
-    // TODO: address { city, municipality, street, street number }
+    city: {
+        type: String
+    },
+    municipality: {
+        type: String
+    },
+    street: {
+        type: String
+    },
+    streetnumber: {
+        type: String
+    },
     ishouse: {
         type: Boolean
     },
