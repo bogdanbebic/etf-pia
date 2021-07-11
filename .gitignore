@@ -1,2 +1,6 @@
 # Files containing data for the db are in this folder
 data/
+
+# C3.js files
+c3-0.7.20.zip
+c3-0.7.20/
