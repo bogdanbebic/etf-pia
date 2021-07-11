@@ -6,8 +6,12 @@
       </mat-list-item>
       <mat-list-item>
         <mat-icon matListIcon>place</mat-icon>
-        <!-- TODO: address - city, municipality, street, number -->
-        <span>Beograd, Zvezdara, Bulevar Kralja Aleksandra, 73</span>
+        <span>
+          {{ realEstateDetail.city }},
+          {{ realEstateDetail.municipality }},
+          {{ realEstateDetail.street }},
+          {{ realEstateDetail.streetnumber }}
+        </span>
       </mat-list-item>
       <mat-list-item>
         <mat-icon matListIcon>maps_home_work</mat-icon>
