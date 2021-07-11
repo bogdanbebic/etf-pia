@@ -2,54 +2,54 @@
   <mat-card-content>
     <mat-list>
       <mat-list-item>
-        <p>{{ realEstateDetail.description }}</p>
+        <p>{{ description }}</p>
       </mat-list-item>
       <mat-list-item>
         <mat-icon matListIcon>place</mat-icon>
         <span>
-          {{ realEstateDetail.city }},
-          {{ realEstateDetail.municipality }},
-          {{ realEstateDetail.street }},
-          {{ realEstateDetail.streetnumber }}
+          {{ city }},
+          {{ municipality }},
+          {{ street }},
+          {{ streetnumber }}
         </span>
       </mat-list-item>
       <mat-list-item>
         <mat-icon matListIcon>maps_home_work</mat-icon>
-        <span *ngIf="realEstateDetail.ishouse">House with {{ realEstateDetail.numfloors }} floors</span>
-        <span *ngIf="!realEstateDetail.ishouse">Apartment on {{ realEstateDetail.numfloors }}. floor</span>
+        <span *ngIf="ishouse">House with {{ numfloors }} floors</span>
+        <span *ngIf="!ishouse">Apartment on {{ numfloors }}. floor</span>
       </mat-list-item>
       <mat-list-item>
-        <span>Size: {{ realEstateDetail.size }} square meters</span>
+        <span>Size: {{ size }} square meters</span>
       </mat-list-item>
       <mat-list-item>
-        <span>Number of Rooms: {{ realEstateDetail.numrooms }} </span>
+        <span>Number of Rooms: {{ numrooms }} </span>
       </mat-list-item>
       <mat-list-item>
         <span>Furnished:</span>
-        <mat-icon *ngIf="realEstateDetail.furnished">check</mat-icon>
-        <mat-icon *ngIf="!realEstateDetail.furnished">clear</mat-icon>
+        <mat-icon *ngIf="furnished">check</mat-icon>
+        <mat-icon *ngIf="!furnished">clear</mat-icon>
       </mat-list-item>
       <!-- TODO: gallery -->
       <mat-list-item>
-        <span *ngIf="realEstateDetail.renting">For rent</span>
-        <span *ngIf="!realEstateDetail.renting">For sale</span>
+        <span *ngIf="renting">For rent</span>
+        <span *ngIf="!renting">For sale</span>
       </mat-list-item>
       <mat-list-item>
         <mat-icon matListIcon>euro</mat-icon>
-        <span>{{ realEstateDetail.price }}</span>
+        <span>{{ price }}</span>
       </mat-list-item>
       <mat-list-item>
         <span>Owner:&nbsp;</span>
-        <span *ngIf="realEstateDetail.owner === 'admin'">Agency</span>
-        <span *ngIf="realEstateDetail.owner !== 'admin'">{{ realEstateDetail.owner }}</span>
+        <span *ngIf="owner === 'admin'">Agency</span>
+        <span *ngIf="owner !== 'admin'">{{ owner }}</span>
       </mat-list-item>
     </mat-list>
   </mat-card-content>
   <mat-card-actions>
-    <div *ngIf="realEstateDetail.renting">
+    <div *ngIf="renting">
       <button mat-stroked-button color="primary" (click)="rent()">Rent</button>
     </div>
-    <div *ngIf="!realEstateDetail.renting">
+    <div *ngIf="!renting">
       <button mat-stroked-button color="primary" (click)="buy()">Buy</button>
     </div>
   </mat-card-actions>

@@ -9,7 +9,19 @@ import { RealEstateService } from '../real-estate.service';
 })
 export class RealEstateDetailComponent implements OnInit {
 
-  realEstateDetail: any;
+  description: string;
+  city: string;
+  municipality: string;
+  street: string;
+  streetnumber: string;
+  ishouse: boolean;
+  numfloors: number;
+  size: number;
+  numrooms: number;
+  furnished: boolean;
+  renting: boolean;
+  price: number;
+  owner: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,9 +34,21 @@ export class RealEstateDetailComponent implements OnInit {
 
   getRealEstate() {
     const id = String(this.route.snapshot.paramMap.get('id'));
-    this.realEstateService.getRealEstate(id).subscribe(realEstate => {
-      this.realEstateDetail = realEstate;
-      console.log(this.realEstateDetail);
+    this.realEstateService.getRealEstate(id).subscribe((realEstate: any) => {
+      console.log(realEstate);
+      this.description = realEstate.description;
+      this.city = realEstate.city;
+      this.municipality = realEstate.municipality;
+      this.street = realEstate.street;
+      this.streetnumber = realEstate.streetnumber;
+      this.ishouse = realEstate.ishouse;
+      this.numfloors = realEstate.numfloors;
+      this.size = realEstate.size;
+      this.numrooms = realEstate.numrooms;
+      this.furnished = realEstate.furnished;
+      this.renting = realEstate.renting;
+      this.price = realEstate.price;
+      this.owner = realEstate.owner;
     });
   }
 
