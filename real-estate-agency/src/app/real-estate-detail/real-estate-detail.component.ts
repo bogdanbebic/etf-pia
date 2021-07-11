@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { RealEstateService } from '../real-estate.service';
 
 @Component({
   selector: 'app-real-estate-detail',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RealEstateDetailComponent implements OnInit {
 
-  constructor() { }
+  realEstateDetail: any;
+
+  constructor(
+    private route: ActivatedRoute,
+    private realEstateService: RealEstateService
+  ) { }
 
   ngOnInit(): void {
+    this.getRealEstate();
+  }
+
+  getRealEstate() {
+    const id = String(this.route.snapshot.paramMap.get('id'));
+    this.realEstateService.getRealEstate(id).subscribe(realEstate => {
+      this.realEstateDetail = realEstate;
+      console.log(this.realEstateDetail);
+    });
   }
 
 }

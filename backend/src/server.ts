@@ -177,6 +177,19 @@ router.route('/allUsers').post((req, res) => {
 
 // real estate routes
 
+router.route('/real-estate-get').post((req, res) => {
+    const id = new mongoose.mongo.ObjectId(req.body._id);
+    realEstateModel.findOne({ _id: id, 'active': true }, (err, realEstate) => {
+        if (err) {
+            console.log(err);
+            res.json(null);
+            return;
+        }
+
+        res.json(realEstate);
+    });
+});
+
 router.route('/real-estates-list').post((req, res) => {
     realEstateModel.find({}, (err, realEstates) => {
         if (err) {
