@@ -1,1 +1,92 @@
-<p>real-estates-new works!</p>
+<div class="center">
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <input [(ngModel)]="description" matInput required>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>City</mat-label>
+    <input [(ngModel)]="city" matInput required>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>Municipality</mat-label>
+    <input [(ngModel)]="municipality" matInput required>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>Street</mat-label>
+    <input [(ngModel)]="street" matInput required>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>Street Number</mat-label>
+    <input [(ngModel)]="streetnumber" matInput required>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>House/Apartment</mat-label>
+    <mat-select [(ngModel)]="ishouse" required>
+      <mat-option [value]="true">
+        House
+      </mat-option>
+      <mat-option [value]="false">
+        Apartment
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>Num Floor</mat-label>
+    <input [(ngModel)]="numfloors" matInput required type="number">
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>Size in square meters</mat-label>
+    <input [(ngModel)]="size" matInput required type="number">
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>Number of rooms</mat-label>
+    <input [(ngModel)]="numrooms" matInput required type="number">
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>Furnished</mat-label>
+    <mat-select [(ngModel)]="furnished" required>
+      <mat-option [value]="true">
+         Yes
+      </mat-option>
+      <mat-option [value]="false">
+        No
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br />
+
+  <!-- TODO: pictures -->
+
+  <mat-form-field appearance="fill">
+    <mat-label>For Rent/For Sale</mat-label>
+    <mat-select [(ngModel)]="renting" required>
+      <mat-option [value]="true">
+        For Rent
+      </mat-option>
+      <mat-option [value]="false">
+        For Sale
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>Price</mat-label>
+    <input [(ngModel)]="price" matInput required type="number">
+  </mat-form-field>
+  <br />
+
+  <br />
+  <button mat-stroked-button color="primary" (click)="newRealEstate()">
+    <mat-icon>add</mat-icon>
+    <span>New Real Estate</span>
+  </button>
+</div>
