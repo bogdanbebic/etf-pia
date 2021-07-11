@@ -324,5 +324,26 @@ router.route('/search').post((req, res) => {
     });
 });
 
+router.route('/dashboard-real-estate-per-city').post((req, res) => {
+    let cursor = realEstateModel.collection.aggregate([{ $group: { _id: "$city", total: { $sum: 1 } } }]);
+    cursor.toArray().then(arr => res.json(arr));
+});
+
+router.route('/dashboard-houses-rent-sale').post((req, res) => {
+    let cursor = realEstateModel.collection.aggregate([
+        { $match: { ishouse: true } },
+        { $group: { _id: "$renting", total: { $sum: 1 } } }
+    ]);
+    cursor.toArray().then(arr => res.json(arr));
+});
+
+router.route('/dashboard-apartments-rent-sale').post((req, res) => {
+    let cursor = realEstateModel.collection.aggregate([
+        { $match: { ishouse: false } },
+        { $group: { _id: "$renting", total: { $sum: 1 } } }
+    ]);
+    cursor.toArray().then(arr => res.json(arr));
+});
+
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));
