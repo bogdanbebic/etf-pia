@@ -28,4 +28,12 @@ export class RealEstateDetailComponent implements OnInit {
     });
   }
 
+  rent() {
+    // TODO: implement
+  }
+
+  buy() {
+    // TODO: implement
+  }
+
 }
