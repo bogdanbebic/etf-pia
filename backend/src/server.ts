@@ -177,6 +177,36 @@ router.route('/allUsers').post((req, res) => {
 
 // real estate routes
 
+router.route('/real-estate-new').post((req, res) => {
+    const realEstateData = {
+        description: req.body.description,
+        city: req.body.city,
+        municipality: req.body.municipality,
+        street: req.body.street,
+        streetnumber: req.body.streetnumber,
+        ishouse: req.body.ishouse,
+        numfloors: req.body.numfloors,
+        size: req.body.size,
+        numrooms: req.body.numrooms,
+        furnished: req.body.furnished,
+        renting: req.body.renting,
+        price: req.body.price,
+        owner: req.body.owner,
+        promoted: false,
+        active: false,
+    };
+
+    realEstateModel.collection.insertOne(realEstateData, (err, realEstate) => {
+        if (err) {
+            console.log(err);
+            res.json({ ok: false });
+            return;
+        }
+
+        res.json({ ok: true });
+    });
+});
+
 router.route('/real-estate-get').post((req, res) => {
     const id = new mongoose.mongo.ObjectId(req.body._id);
     realEstateModel.findOne({ _id: id, 'active': true }, (err, realEstate) => {
