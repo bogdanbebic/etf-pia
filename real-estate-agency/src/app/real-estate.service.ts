@@ -58,5 +58,17 @@ export class RealEstateService {
     return this.http.post(`${this.uri}/search`, body);
   }
 
+  getDashboardPerCityData() {
+    return this.http.post(`${this.uri}/dashboard-real-estate-per-city`, null);
+  }
+
+  getDashboardHousesRentSaleData() {
+    return this.http.post(`${this.uri}/dashboard-houses-rent-sale`, null);
+  }
+
+  getDashboardApartmentsRentSaleData() {
+    return this.http.post(`${this.uri}/dashboard-apartments-rent-sale`, null);
+  }
+
   constructor(private http: HttpClient) { }
 }
