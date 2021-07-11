@@ -1,4 +1,5 @@
 export interface RealEstateCardInfo {
+  _id: string;
   // TODO: picture
   // TODO: address - municipality, city
   price: number;

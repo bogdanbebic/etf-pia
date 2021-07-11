@@ -27,6 +27,7 @@ import { UsersListComponent } from './users-list/users-list.component';
 import { RealEstatesMyListComponent } from './real-estates-my-list/real-estates-my-list.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
+import { RealEstateDetailComponent } from './real-estate-detail/real-estate-detail.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { PasswordChangeComponent } from './password-change/password-change.compo
     UsersListComponent,
     RealEstatesMyListComponent,
     AccountSettingsComponent,
-    PasswordChangeComponent
+    PasswordChangeComponent,
+    RealEstateDetailComponent
   ],
   imports: [
     BrowserModule,

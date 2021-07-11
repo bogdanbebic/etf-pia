@@ -6,6 +6,7 @@ import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.compo
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
+import { RealEstateDetailComponent } from './real-estate-detail/real-estate-detail.component';
 import { RealEstatesListComponent } from './real-estates-list/real-estates-list.component';
 import { RealEstatesMyListComponent } from './real-estates-my-list/real-estates-my-list.component';
 import { RealEstatesNewComponent } from './real-estates-new/real-estates-new.component';
@@ -70,6 +71,11 @@ const routes: Routes = [
     path: 'user-list', component: UsersListComponent,
     canActivate: [AuthGuard],
     data: { roles: [UserRoles.Admin] }
+  },
+  {
+    path: 'real-estate/:id', component: RealEstateDetailComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [UserRoles.Registered] }
   },
   {
     path: '', component: HomepageComponent,
