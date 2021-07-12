@@ -39,23 +39,15 @@ export class RealEstatesNewComponent implements OnInit {
     const username = this.authorizationService.currentUser.username;
     const owner = userRole == UserRoles.Registered ? username : "admin";
 
-    const realEstateData = {
-      description: this.description,
-      city: this.city,
-      municipality: this.municipality,
-      street: this.street,
-      streetnumber: this.streetnumber,
-      ishouse: this.ishouse,
-      numfloors: this.numfloors,
-      size: this.size,
-      numrooms: this.numrooms,
-      furnished: this.furnished,
-      renting: this.renting,
-      price: this.price,
-      owner: owner,
-    };
+    const formElement = document.getElementById('formNewRealEstate') as HTMLFormElement;
+    let formData = new FormData(formElement);
+    formData.append('file', this.images);
+    formData.append('owner', owner);
+    formData.append('ishouse', '' + this.ishouse);
+    formData.append('furnished', '' + this.furnished);
+    formData.append('renting', '' + this.renting);
 
-    this.realEstateService.newRealEstate(realEstateData, this.images).subscribe((returnCode: BackendReturnCode) => {
+    this.realEstateService.newRealEstate(formData).subscribe((returnCode: BackendReturnCode) => {
       if (returnCode.ok) {
         this.snackBar.open("New Real Estate Success!", "OK", {
           duration: 2000

@@ -8,8 +8,8 @@ export class RealEstateService {
 
   uri = 'http://localhost:4000';
 
-  newRealEstate(realEstateData, images) {
-    return this.http.post(`${this.uri}/real-estate-new`, realEstateData);
+  newRealEstate(realEstateFormData) {
+    return this.http.post(`${this.uri}/real-estate-new`, realEstateFormData);
   }
 
   getRealEstate(id: string) {

@@ -14,7 +14,8 @@ const storage = multer.diskStorage({
         cb(null, 'uploads');
     },
     filename: (req: any, file: any, cb: any) => {
-        cb(null, 'profile-' + Date.now() + file.originalname);
+        let prefix = req.body.username ? 'profile-' : 'real-estate-';
+        cb(null, prefix + Date.now() + file.originalname);
     }
 });
 
@@ -263,23 +264,36 @@ router.route('/allUsers').post((req, res) => {
 
 // real estate routes
 
-router.route('/real-estate-new').post((req, res) => {
-    const realEstateData = {
+app.post('/real-estate-new', upload.array('file'), (req: any, res, next) => {
+    const file = req.files;
+
+    if (!file) {
+        const error = new Error("Please upload file");
+        return next(error);
+    }
+
+    if (file.length < 3) {
+        res.json({ ok: false });
+        return;
+    }
+
+    let realEstateData = {
         description: req.body.description,
         city: req.body.city,
         municipality: req.body.municipality,
         street: req.body.street,
         streetnumber: req.body.streetnumber,
-        ishouse: req.body.ishouse,
-        numfloors: req.body.numfloors,
-        size: req.body.size,
-        numrooms: req.body.numrooms,
-        furnished: req.body.furnished,
-        renting: req.body.renting,
-        price: req.body.price,
+        ishouse: Boolean(req.body.ishouse),
+        numfloors: Number(req.body.numfloors),
+        size: Number(req.body.size),
+        numrooms: Number(req.body.numrooms),
+        furnished: Boolean(req.body.furnished),
+        renting: Boolean(req.body.renting),
+        price: Number(req.body.price),
         owner: req.body.owner,
         promoted: false,
         active: false,
+        pictures: file.map((element: any) => element.filename),
     };
 
     realEstateModel.collection.insertOne(realEstateData, (err, realEstate) => {
