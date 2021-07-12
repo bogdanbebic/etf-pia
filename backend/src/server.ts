@@ -37,6 +37,56 @@ const router = express.Router();
 
 // users routes
 
+app.post('/register-with-picture', upload.single('file'), (req: any, res, next) => {
+    const file = req.file;
+
+    if (!file) {
+        const error = new Error("Please upload file");
+        return next(error);
+    }
+
+    let newUser = {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+        city: req.body.city,
+        country: req.body.country,
+        role: Number(req.body.role),
+        active: false,
+        picture: file.filename,
+    };
+
+    const passwordRepeat = req.body.passwordRepeat;
+    if (!checkNewPassword(newUser.password, passwordRepeat)) {
+        res.json({ ok: false });
+        return;
+    }
+
+    userModel.findOne({ $or: [{ 'username': newUser.username }, { 'email': newUser.email }] }, (err, user) => {
+        if (err) {
+            console.log(err);
+            res.json({ ok: false });
+            return;
+        }
+        if (user) {
+            res.json({ ok: false });
+            return;
+        }
+
+        userModel.collection.insertOne(newUser, (err, user) => {
+            if (err) {
+                console.log(err);
+                res.json({ ok: false });
+                return;
+            }
+
+            res.json({ ok: true });
+        });
+    });
+});
+
 router.route('/login').post((req, res) => {
     let username = req.body.username;
     let password = req.body.password;
@@ -62,6 +112,7 @@ router.route('/register').post((req, res) => {
         country: req.body.country,
         role: req.body.role,
         active: false,
+        picture: 'default-picture.jpg',
     };
 
     const passwordRepeat = req.body.passwordRepeat;
