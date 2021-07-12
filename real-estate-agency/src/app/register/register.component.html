@@ -51,6 +51,12 @@
     </mat-select>
   </mat-form-field>
   <br />
+  <span>Profile picture:</span>
+  <br />
+  <br />
+  <input #fileInput type="file" name="image" accept="image/*" (change)='selectImage($event)'>
+  <br />
+  <br />
 
   <button mat-stroked-button color="primary" (click)="register()">
     <mat-icon>app_registration</mat-icon>

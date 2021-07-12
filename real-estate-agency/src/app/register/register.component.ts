@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private usersService: UsersService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
   }
@@ -46,18 +46,43 @@ export class RegisterComponent implements OnInit {
       role: this.role,
     };
 
-    this.usersService.register(newUserData).subscribe((returnCode: BackendReturnCode) => {
-      if (returnCode.ok) {
-        this.snackBar.open("Registration success!", "OK", {
-          duration: 2000
-        });
-      }
-      else {
-        this.snackBar.open("Registration failed!", "OK", {
-          duration: 2000
-        });
-      }
-    });
+    if (!this.images) {
+      this.usersService.register(newUserData).subscribe((returnCode: BackendReturnCode) => {
+        if (returnCode.ok) {
+          this.snackBar.open("Registration success!", "OK", {
+            duration: 2000
+          });
+        }
+        else {
+          this.snackBar.open("Registration failed!", "OK", {
+            duration: 2000
+          });
+        }
+      });
+    }
+    else {
+      this.usersService.registerWithPicture(newUserData, this.images).subscribe((returnCode: BackendReturnCode) => {
+        if (returnCode.ok) {
+          this.snackBar.open("Registration success!", "OK", {
+            duration: 2000
+          });
+        }
+        else {
+          this.snackBar.open("Registration failed!", "OK", {
+            duration: 2000
+          });
+        }
+      });
+    }
+  }
+
+  images = null;
+
+  selectImage(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.images = file;
+    }
   }
 
 }
