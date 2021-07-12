@@ -6,6 +6,18 @@ import userModel from './model/user';
 import realEstateModel from './model/real-estate';
 import { checkNewPassword } from './password-utils';
 
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: (req: any, file: any, cb: any) => {
+        cb(null, 'uploads');
+    },
+    filename: (req: any, file: any, cb: any) => {
+        cb(null, 'profile-' + Date.now() + file.originalname);
+    }
+});
+
+var upload = multer({ storage: storage });
+
 const app = express();
 
 app.use(cors());

@@ -9,3 +9,6 @@
 
 # dependencies
 /node_modules
+
+# uploaded pictures
+uploads/
