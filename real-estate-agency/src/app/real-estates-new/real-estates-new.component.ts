@@ -55,7 +55,7 @@ export class RealEstatesNewComponent implements OnInit {
       owner: owner,
     };
 
-    this.realEstateService.newRealEstate(realEstateData).subscribe((returnCode: BackendReturnCode) => {
+    this.realEstateService.newRealEstate(realEstateData, this.images).subscribe((returnCode: BackendReturnCode) => {
       if (returnCode.ok) {
         this.snackBar.open("New Real Estate Success!", "OK", {
           duration: 2000
@@ -67,6 +67,16 @@ export class RealEstatesNewComponent implements OnInit {
         });
       }
     });
+  }
+
+  images = null;
+
+  selectImages(event) {
+    if (event.target.files.length > 0) {
+      const files = event.target.files;
+      this.images = files;
+      console.log(files);
+    }
   }
 
 }

@@ -64,8 +64,14 @@
   </mat-form-field>
   <br />
 
-  <!-- TODO: pictures -->
+  <span>Upload at least 3 pictures: *</span>
+  <br />
+  <br />
 
+  <input #fileInput type="file" name="image" accept="image/*" multiple required (change)='selectImages($event)'>
+
+  <br />
+  <br />
   <mat-form-field appearance="fill">
     <mat-label>For Rent/For Sale</mat-label>
     <mat-select [(ngModel)]="renting" required>
