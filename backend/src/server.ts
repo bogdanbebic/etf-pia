@@ -59,6 +59,27 @@ router.post('/download-profile-picture', function (req, res) {
     });
 });
 
+router.post('/download', (req, res) => {
+    const filepath = path.join(__dirname, '../uploads') + '/' + req.body.path;
+    res.sendFile(filepath);
+});
+
+router.route('/real-estate-picture-paths').post((req, res) => {
+    const id = new mongoose.mongo.ObjectId(req.body._id);
+    realEstateModel.findOne({ '_id': id }, (err, realEstate) => {
+        if (err) {
+            console.log(err);
+            res.json(null);
+            return;
+        }
+
+        if (realEstate)
+            res.json(realEstate.get('pictures'));
+        else
+            res.json(null);
+    });
+});
+
 router.post('/download-random-real-estate-picture', function (req, res) {
     const id = req.body._id;
     realEstateModel.findOne({ '_id': id }, (err, realEstate) => {
