@@ -6,6 +6,8 @@ import userModel from './model/user';
 import realEstateModel from './model/real-estate';
 import { checkNewPassword } from './password-utils';
 
+const path = require('path');
+
 const multer = require('multer');
 const storage = multer.diskStorage({
     destination: (req: any, file: any, cb: any) => {
@@ -34,6 +36,27 @@ conn.once('open', () => {
 });
 
 const router = express.Router();
+
+// files route
+
+router.post('/download-profile-picture', function (req, res) {
+    const username = req.body.username;
+    userModel.findOne({ 'username': username }, (err, user) => {
+        if (err) {
+            console.log(err);
+            res.json(null);
+            return;
+        }
+
+        if (user) {
+            let filepath = path.join(__dirname, '../uploads') + '/' + user.get('picture');
+            res.sendFile(filepath);
+        }
+        else {
+            res.json(null);
+        }
+    });
+});
 
 // users routes
 
