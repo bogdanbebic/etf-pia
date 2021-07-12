@@ -1,59 +1,71 @@
 <table mat-table [dataSource]="dataSource">
 
-  <ng-container matColumnDef="username">
-    <th mat-header-cell *matHeaderCellDef> Username </th>
-    <td mat-cell *matCellDef="let element"> {{element.username}} </td>
-  </ng-container>
+  <mat-card>
+    <ng-container matColumnDef="picture">
+      <th mat-header-cell *matHeaderCellDef> Profile Picture </th>
+      <td mat-cell *matCellDef="let element">
+        <img mat-card-avatar [src]="element.imgurl">
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="email">
-    <th mat-header-cell *matHeaderCellDef> email </th>
-    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-  </ng-container>
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef> Username </th>
+      <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="firstname">
-    <th mat-header-cell *matHeaderCellDef> First Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
-  </ng-container>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="lastname">
-    <th mat-header-cell *matHeaderCellDef> Last Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
-  </ng-container>
+    <ng-container matColumnDef="firstname">
+      <th mat-header-cell *matHeaderCellDef> First Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="active">
-    <th mat-header-cell *matHeaderCellDef> Active </th>
-    <td mat-cell *matCellDef="let element"> {{element.active}} </td>
-  </ng-container>
+    <ng-container matColumnDef="lastname">
+      <th mat-header-cell *matHeaderCellDef> Last Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="accept">
-    <th mat-header-cell *matHeaderCellDef> Accept Request </th>
-    <td mat-cell *matCellDef="let element; let i = index">
-      <button *ngIf="!dataSource[i].active" mat-stroked-button color="primary" (click)="acceptUser(dataSource[i].username)">
-        Accept
-        <mat-icon>thumb_up</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="active">
+      <th mat-header-cell *matHeaderCellDef> Active </th>
+      <td mat-cell *matCellDef="let element"> {{element.active}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="reject">
-    <th mat-header-cell *matHeaderCellDef> Reject Request </th>
-    <td mat-cell *matCellDef="let element; let i = index">
-      <button *ngIf="!dataSource[i].active" mat-stroked-button color="warn" (click)="rejectUser(dataSource[i].username)">
-        Reject
-        <mat-icon>thumb_down</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="accept">
+      <th mat-header-cell *matHeaderCellDef> Accept Request </th>
+      <td mat-cell *matCellDef="let element; let i = index">
+        <button *ngIf="!dataSource[i].active" mat-stroked-button color="primary"
+          (click)="acceptUser(dataSource[i].username)">
+          Accept
+          <mat-icon>thumb_up</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="delete">
-    <th mat-header-cell *matHeaderCellDef> Delete User </th>
-    <td mat-cell *matCellDef="let element; let i = index">
-      <button *ngIf="dataSource[i].active" mat-stroked-button color="warn" (click)="deleteUser(dataSource[i].username)">
-        Delete User
-        <mat-icon>person_remove</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="reject">
+      <th mat-header-cell *matHeaderCellDef> Reject Request </th>
+      <td mat-cell *matCellDef="let element; let i = index">
+        <button *ngIf="!dataSource[i].active" mat-stroked-button color="warn"
+          (click)="rejectUser(dataSource[i].username)">
+          Reject
+          <mat-icon>thumb_down</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Delete User </th>
+      <td mat-cell *matCellDef="let element; let i = index">
+        <button *ngIf="dataSource[i].active" mat-stroked-button color="warn"
+          (click)="deleteUser(dataSource[i].username)">
+          Delete User
+          <mat-icon>person_remove</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+  </mat-card>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { FilesService } from '../files.service';
 import { UsersService } from '../users.service';
 
 @Component({
@@ -8,11 +10,13 @@ import { UsersService } from '../users.service';
 })
 export class UsersListComponent implements OnInit {
 
-  displayedColumns: string[] = ['username', 'email', 'firstname', 'lastname', 'accept', 'reject', 'delete' ];
+  displayedColumns: string[] = ['picture', 'username', 'email', 'firstname', 'lastname', 'accept', 'reject', 'delete'];
   dataSource: any;
 
   constructor(
-    private usersService: UsersService
+    private usersService: UsersService,
+    private filesService: FilesService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -22,6 +26,12 @@ export class UsersListComponent implements OnInit {
   getAll() {
     this.usersService.getAll().subscribe(users => {
       this.dataSource = users;
+      this.dataSource.forEach(element => {
+        this.filesService.getProfilePicture(element.username).subscribe(picture => {
+          let objURL = URL.createObjectURL(picture);
+          element.imgurl = this.sanitizer.bypassSecurityTrustUrl(objURL);
+        });
+      });
     });
   }
 
