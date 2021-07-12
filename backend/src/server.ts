@@ -59,6 +59,27 @@ router.post('/download-profile-picture', function (req, res) {
     });
 });
 
+router.post('/download-random-real-estate-picture', function (req, res) {
+    const id = req.body._id;
+    realEstateModel.findOne({ '_id': id }, (err, realEstate) => {
+        if (err) {
+            console.log(err);
+            res.json(null);
+            return;
+        }
+
+        if (realEstate) {
+            const pictures = realEstate.get('pictures');
+            const picturePath = pictures[Math.floor(Math.random() * pictures.length)];
+            const filepath = path.join(__dirname, '../uploads') + '/' + picturePath;
+            res.sendFile(filepath);
+        }
+        else {
+            res.json(null);
+        }
+    });
+});
+
 // users routes
 
 app.post('/register-with-picture', upload.single('file'), (req: any, res, next) => {
