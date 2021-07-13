@@ -13,6 +13,7 @@ import { RealEstatesNewComponent } from './real-estates-new/real-estates-new.com
 import { RealEstatesPromotedComponent } from './real-estates-promoted/real-estates-promoted.component';
 import { RealEstatesUnapprovedComponent } from './real-estates-unapproved/real-estates-unapproved.component';
 import { RegisterComponent } from './register/register.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserRoles } from './user-roles.enum';
 import { UsersListComponent } from './users-list/users-list.component';
 
@@ -69,6 +70,11 @@ const routes: Routes = [
   },
   {
     path: 'user-list', component: UsersListComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [UserRoles.Admin] }
+  },
+  {
+    path: 'user-edit/:username', component: UserEditComponent,
     canActivate: [AuthGuard],
     data: { roles: [UserRoles.Admin] }
   },

@@ -10,7 +10,17 @@ import { UsersService } from '../users.service';
 })
 export class UsersListComponent implements OnInit {
 
-  displayedColumns: string[] = ['picture', 'username', 'email', 'firstname', 'lastname', 'accept', 'reject', 'delete'];
+  displayedColumns: string[] = [
+    'picture',
+    'username',
+    'email',
+    'firstname',
+    'lastname',
+    'accept',
+    'reject',
+    'edit',
+    'delete',
+  ];
   dataSource: any;
 
   constructor(
