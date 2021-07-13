@@ -26,4 +26,15 @@
   <button mat-stroked-button color="primary" (click)="changeUserData()">
     <span>Change Data</span>
   </button>
+
+  <br />
+  <h1>Change Profile Picture:</h1>
+  <br />
+  <br />
+  <input #fileInput type="file" name="image" accept="image/*" (change)='selectImage($event)'>
+  <br />
+  <br />
+  <button mat-stroked-button color="primary" (click)="changeProfilePicture()">
+    <span>Change Profile Picture</span>
+  </button>
 </div>

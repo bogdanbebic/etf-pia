@@ -9,6 +9,13 @@ export class UsersService {
 
   uri = 'http://localhost:4000';
 
+  changeProfilePicture(username: string, file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('username', username);
+    return this.http.post(`${this.uri}/profile-picture-change`, formData);
+  }
+
   registerWithPicture(newUserData, file) {
     const formData = new FormData();
     formData.append('file', file);

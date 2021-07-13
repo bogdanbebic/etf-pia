@@ -103,6 +103,19 @@ router.post('/download-random-real-estate-picture', function (req, res) {
 
 // users routes
 
+app.post('/profile-picture-change', upload.single('file'), (req: any, res, next) => {
+    const file = req.file;
+
+    if (!file) {
+        const error = new Error("Please upload file");
+        return next(error);
+    }
+
+    const username = req.body.username;
+    userModel.collection.updateOne({ 'username': username }, { $set: { 'picture': file.filename } });
+    res.json({ ok: true });
+});
+
 app.post('/register-with-picture', upload.single('file'), (req: any, res, next) => {
     const file = req.file;
 

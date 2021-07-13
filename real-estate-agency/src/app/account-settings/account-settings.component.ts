@@ -54,4 +54,19 @@ export class AccountSettingsComponent implements OnInit {
     });
   }
 
+  changeProfilePicture() {
+    const username = this.authorizationService.currentUser.username;
+    this.usersService.changeProfilePicture(username, this.images).subscribe(ok => {
+      this.getUser();
+    });
+  }
+
+  images = null;
+
+  selectImage(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.images = file;
+    }
+  }
 }
