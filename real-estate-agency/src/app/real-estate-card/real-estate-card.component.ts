@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { FilesService } from '../files.service';
 import { RealEstateCardInfo } from '../real-estate-card-info';
 
 @Component({
@@ -9,10 +11,18 @@ import { RealEstateCardInfo } from '../real-estate-card-info';
 export class RealEstateCardComponent implements OnInit {
 
   @Input() realEstateInfo: RealEstateCardInfo;
+  imgurl: any;
 
-  constructor() { }
+  constructor(
+    private filesService: FilesService,
+    private sanitizer: DomSanitizer
+  ) { }
 
   ngOnInit(): void {
+    this.filesService.getRandomRealEstatePicture(this.realEstateInfo._id).subscribe(picture => {
+      let objURL = URL.createObjectURL(picture);
+      this.imgurl = this.sanitizer.bypassSecurityTrustUrl(objURL);
+    });
   }
 
 }
