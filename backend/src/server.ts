@@ -306,7 +306,7 @@ router.route('/get-user').post((req, res) => {
 });
 
 router.route('/allUsers').post((req, res) => {
-    userModel.find({}, '-password', (err, users) => {
+    userModel.find({ 'role': { $ne: 3 } }, '-password', (err, users) => {
         if (err) {
             console.log(err);
             res.json(null);
