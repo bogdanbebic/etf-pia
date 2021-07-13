@@ -8,6 +8,10 @@ export class RealEstateService {
 
   uri = 'http://localhost:4000';
 
+  getRealEstatePicturePaths(id: string) {
+    return this.http.post(`${this.uri}/real-estate-picture-paths`, { _id: id });
+  }
+
   newRealEstate(realEstateFormData) {
     return this.http.post(`${this.uri}/real-estate-new`, realEstateFormData);
   }
