@@ -54,3 +54,9 @@
     </div>
   </mat-card-actions>
 </mat-card>
+
+<mat-grid-list cols="3">
+  <mat-grid-tile *ngFor="let imgurl of imgurls">
+    <img [src]="imgurl">
+  </mat-grid-tile>
+</mat-grid-list>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { FilesService } from '../files.service';
 import { RealEstateService } from '../real-estate.service';
 
 @Component({
@@ -22,10 +24,15 @@ export class RealEstateDetailComponent implements OnInit {
   renting: boolean;
   price: number;
   owner: string;
+  pictures: string[];
+
+  imgurls = [];
 
   constructor(
     private route: ActivatedRoute,
-    private realEstateService: RealEstateService
+    private realEstateService: RealEstateService,
+    private filesService: FilesService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -49,6 +56,13 @@ export class RealEstateDetailComponent implements OnInit {
       this.renting = realEstate.renting;
       this.price = realEstate.price;
       this.owner = realEstate.owner;
+      this.pictures = realEstate.pictures;
+      this.pictures.forEach(picturePath => {
+        this.filesService.getPicture(picturePath).subscribe(picture => {
+          const objURL = URL.createObjectURL(picture);
+          this.imgurls.push(this.sanitizer.bypassSecurityTrustUrl(objURL));
+        });
+      });
     });
   }
 
