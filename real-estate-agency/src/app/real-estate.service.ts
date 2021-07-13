@@ -74,5 +74,9 @@ export class RealEstateService {
     return this.http.post(`${this.uri}/dashboard-apartments-rent-sale`, null);
   }
 
+  getDashboardPricesData() {
+    return this.http.post(`${this.uri}/dashboard-real-estate-per-price`, null);
+  }
+
   constructor(private http: HttpClient) { }
 }

@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
     this.generatePerCityChart();
     this.generateHousesChart();
     this.generateApartmentsChart();
+    this.generatePricesChart();
   }
 
   generatePerCityChart() {
@@ -78,6 +79,28 @@ export class DashboardComponent implements OnInit {
         data: {
           type: 'bar',
           columns: columns
+        }
+      });
+    });
+  }
+
+  generatePricesChart() {
+    this.realEstateService.getDashboardPricesData().subscribe((data: any[]) => {
+      let prices = [];
+      data.forEach(element => {
+        prices.push(element.price);
+      });
+
+      c3.generate({
+        bindto: '#chart4',
+        interaction: {
+          enabled: false
+        },
+        data: {
+          type: 'scatter',
+          columns: [
+            ['prices', ...prices]
+          ]
         }
       });
     });
