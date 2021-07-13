@@ -41,7 +41,10 @@ export class RealEstatesNewComponent implements OnInit {
 
     const formElement = document.getElementById('formNewRealEstate') as HTMLFormElement;
     let formData = new FormData(formElement);
-    formData.append('file', this.images);
+
+    for (let index = 0; index < this.images.length; index++)
+      formData.append('file[]', this.images.item(index));
+
     formData.append('owner', owner);
     formData.append('ishouse', '' + this.ishouse);
     formData.append('furnished', '' + this.furnished);

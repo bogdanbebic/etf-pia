@@ -319,7 +319,7 @@ router.route('/allUsers').post((req, res) => {
 
 // real estate routes
 
-app.post('/real-estate-new', upload.array('file'), (req: any, res, next) => {
+app.post('/real-estate-new', upload.array('file[]'), (req: any, res, next) => {
     const file = req.files;
 
     if (!file) {
