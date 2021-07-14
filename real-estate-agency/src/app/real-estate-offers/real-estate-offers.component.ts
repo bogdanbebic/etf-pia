@@ -14,11 +14,14 @@ export class RealEstateOffersComponent implements OnInit {
   displayedColumns: string[] = [
     'username',
     'accept',
+    'rentfrom',
+    'rentto',
   ];
   dataSource: any;
 
   id: string;
   description: string;
+  renting: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +37,7 @@ export class RealEstateOffersComponent implements OnInit {
   getRealEstateOffers() {
     this.realEstateService.getRealEstate(this.id).subscribe((realEstate: any) => {
       this.description = realEstate.description;
+      this.renting = realEstate.renting;
       this.dataSource = realEstate.offers;
     });
   }
