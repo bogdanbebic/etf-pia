@@ -18,6 +18,7 @@ export class RealEstatesMyListComponent implements OnInit {
     'price',
     'promoted',
     'active',
+    'offers',
   ];
   dataSource: any;
 

@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
 import { RealEstateDetailComponent } from './real-estate-detail/real-estate-detail.component';
+import { RealEstateOffersComponent } from './real-estate-offers/real-estate-offers.component';
 import { RealEstatesListComponent } from './real-estates-list/real-estates-list.component';
 import { RealEstatesMyListComponent } from './real-estates-my-list/real-estates-my-list.component';
 import { RealEstatesNewComponent } from './real-estates-new/real-estates-new.component';
@@ -82,6 +83,11 @@ const routes: Routes = [
     path: 'real-estate/:id', component: RealEstateDetailComponent,
     canActivate: [AuthGuard],
     data: { roles: [UserRoles.Registered] }
+  },
+  {
+    path: 'offers/:id', component: RealEstateOffersComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [UserRoles.Registered, UserRoles.Agent] }
   },
   {
     path: '', component: HomepageComponent,

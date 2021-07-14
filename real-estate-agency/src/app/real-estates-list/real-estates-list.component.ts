@@ -18,6 +18,7 @@ export class RealEstatesListComponent implements OnInit {
     'reject',
     'promote',
     'unpromote',
+    'offers',
   ];
   dataSource: any;
 
