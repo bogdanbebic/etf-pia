@@ -33,7 +33,6 @@ let RealEstate = new Schema({
     furnished: {
         type: Boolean
     },
-    // TODO: pictures (at least 3 pictures or videos)
     renting: {
         type: Boolean
     },
