@@ -45,11 +45,43 @@
       </mat-list-item>
     </mat-list>
   </mat-card-content>
-  <mat-card-actions>
+  <div *ngIf="alreadyMadeOffer">
+    You already made an offer for this real estate.
+  </div>
+  <mat-card-actions *ngIf="owner !== username && !alreadyMadeOffer">
     <div *ngIf="renting">
+      <mat-form-field appearance="fill">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [min]="minDate" [formGroup]="range" [rangePicker]="picker">
+          <input required matInput matStartDate formControlName="start" placeholder="Start date">
+          <input required matInput matEndDate formControlName="end" placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+      <br />
       <button mat-stroked-button color="primary" (click)="rent()">Rent</button>
     </div>
     <div *ngIf="!renting">
+      <mat-form-field appearance="fill">
+        <mat-label>Cash or Loan</mat-label>
+        <mat-select [(ngModel)]="payment" required>
+          <mat-option [value]="false">
+            Cash
+          </mat-option>
+          <mat-option [value]="true">
+            Loan
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br />
+      <div *ngIf="payment">
+        Loan with 20% payment = {{ size * price * 0.2 }} <mat-icon matListIcon>euro</mat-icon>
+      </div>
+      <div *ngIf="!payment">
+        Cash payment = {{ size * price }} <mat-icon matListIcon>euro</mat-icon>
+      </div>
+      <br />
       <button mat-stroked-button color="primary" (click)="buy()">Buy</button>
     </div>
   </mat-card-actions>

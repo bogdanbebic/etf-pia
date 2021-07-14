@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { AuthorizationService } from '../authorization.service';
+import { BackendReturnCode } from '../backend-return-code';
 import { FilesService } from '../files.service';
 import { RealEstateService } from '../real-estate.service';
 
@@ -25,18 +29,33 @@ export class RealEstateDetailComponent implements OnInit {
   price: number;
   owner: string;
   pictures: string[];
+  alreadyMadeOffer: boolean;
 
   imgurls = [];
+
+  username: string;
+
+  payment: boolean;
+
+  minDate: Date;
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
 
   constructor(
     private route: ActivatedRoute,
     private realEstateService: RealEstateService,
     private filesService: FilesService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private authorizationService: AuthorizationService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
+    this.username = this.authorizationService.currentUser.username;
     this.getRealEstate();
+    this.minDate = new Date();
   }
 
   getRealEstate() {
@@ -57,6 +76,7 @@ export class RealEstateDetailComponent implements OnInit {
       this.price = realEstate.price;
       this.owner = realEstate.owner;
       this.pictures = realEstate.pictures;
+      this.alreadyMadeOffer = realEstate.offers.includes(this.username);
       this.pictures.forEach(picturePath => {
         this.filesService.getPicture(picturePath).subscribe(picture => {
           const objURL = URL.createObjectURL(picture);
@@ -67,11 +87,37 @@ export class RealEstateDetailComponent implements OnInit {
   }
 
   rent() {
-    // TODO: implement
+    const id = String(this.route.snapshot.paramMap.get('id'));
+    const startDate = this.range.value.start;
+    const endDate = this.range.value.end;
+    this.realEstateService.rent(id, this.username, startDate, endDate).subscribe((ok: BackendReturnCode) => {
+      if (ok.ok) {
+        this.snackBar.open("Rent offer success!", "OK", {
+          duration: 2000
+        });
+      }
+      else {
+        this.snackBar.open("Rent offer failed!", "OK", {
+          duration: 2000
+        });
+      }
+    });
   }
 
   buy() {
-    // TODO: implement
+    const id = String(this.route.snapshot.paramMap.get('id'));
+    this.realEstateService.buy(id, this.username).subscribe((ok: BackendReturnCode) => {
+      if (ok.ok) {
+        this.snackBar.open("Buy offer success!", "OK", {
+          duration: 2000
+        });
+      }
+      else {
+        this.snackBar.open("Buy offer failed!", "OK", {
+          duration: 2000
+        });
+      }
+    });
   }
 
 }

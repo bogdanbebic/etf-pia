@@ -8,6 +8,24 @@ export class RealEstateService {
 
   uri = 'http://localhost:4000';
 
+  buy(id: string, username: string) {
+    const body = {
+      _id: id,
+      username: username,
+    };
+    return this.http.post(`${this.uri}/real-estate-buy`, body);
+  }
+
+  rent(id: string, username: string, dateFrom, dateTo) {
+    const body = {
+      _id: id,
+      username: username,
+      dateFrom: dateFrom,
+      dateTo: dateTo,
+    };
+    return this.http.post(`${this.uri}/real-estate-rent`, body);
+  }
+
   getRealEstatePicturePaths(id: string) {
     return this.http.post(`${this.uri}/real-estate-picture-paths`, { _id: id });
   }
