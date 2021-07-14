@@ -322,14 +322,41 @@ router.route('/allUsers').post((req, res) => {
 router.route('/real-estate-accept').post((req, res) => {
     const id = new mongoose.mongo.ObjectId(req.body._id);
     const username = req.body.username;
-    realEstateModel.collection.updateOne({ _id: id, 'active': true }, { $set: { 'offers': [], 'owner': username } });
-    res.json({ ok: true });
+    realEstateModel.findOne({ _id: id, 'active': true }, (err, realEstate) => {
+        if (err) {
+            console.log(err);
+            res.json({ ok: false });
+            return;
+        }
+
+        if (realEstate.get('renting')) {
+            let offersUsername = realEstate.get('offers').filter((offer: any) => offer.username === username);
+            if (offersUsername.length > 0) {
+                // TODO: check date overlaps
+                let offer = offersUsername[0];
+                realEstateModel.collection.updateOne(
+                    { _id: id, 'active': true },
+                    {
+                        $set: { 'offers': [] },
+                        $push: { 'rentdates': offer },
+                    }
+                );
+            }
+        }
+        else {
+            realEstateModel.collection.updateOne({ _id: id, 'active': true }, { $set: { 'offers': [], 'owner': username } });
+        }
+        res.json({ ok: true });
+    });
 });
 
 router.route('/real-estate-buy').post((req, res) => {
     const id = new mongoose.mongo.ObjectId(req.body._id);
     const username = req.body.username;
-    realEstateModel.collection.updateOne({ _id: id, 'active': true }, { $push: { 'offers': username } });
+    const offer = {
+        username: username,
+    };
+    realEstateModel.collection.updateOne({ _id: id, 'active': true }, { $push: { 'offers': offer } });
     res.json({ ok: true });
 });
 
@@ -343,8 +370,6 @@ router.route('/real-estate-rent').post((req, res) => {
         dateFrom: dateFrom,
         dateTo: dateTo,
     };
-
-    // TODO: check date overlaps
 
     realEstateModel.collection.updateOne({ _id: id, 'active': true }, { $push: { 'offers': offer } });
     res.json({ ok: true });

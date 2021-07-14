@@ -9,14 +9,14 @@
 
   <ng-container matColumnDef="username">
     <th mat-header-cell *matHeaderCellDef> Username </th>
-    <td mat-cell *matCellDef="let element"> {{element}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.username}} </td>
   </ng-container>
 
   <ng-container matColumnDef="accept">
     <th mat-header-cell *matHeaderCellDef> Accept Offer </th>
     <td mat-cell *matCellDef="let element; let i = index">
       <button *ngIf="!dataSource[i].active" mat-stroked-button color="primary"
-        (click)="acceptOffer(dataSource[i])">
+        (click)="acceptOffer(dataSource[i].username)">
         Accept Offer
         <mat-icon>thumb_up</mat-icon>
       </button>
