@@ -319,6 +319,13 @@ router.route('/allUsers').post((req, res) => {
 
 // real estate routes
 
+router.route('/real-estate-accept').post((req, res) => {
+    const id = new mongoose.mongo.ObjectId(req.body._id);
+    const username = req.body.username;
+    realEstateModel.collection.updateOne({ _id: id, 'active': true }, { $set: { 'offers': [], 'owner': username } });
+    res.json({ ok: true });
+});
+
 router.route('/real-estate-buy').post((req, res) => {
     const id = new mongoose.mongo.ObjectId(req.body._id);
     const username = req.body.username;

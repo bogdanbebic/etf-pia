@@ -8,6 +8,14 @@ export class RealEstateService {
 
   uri = 'http://localhost:4000';
 
+  acceptOffer(id: string, username: string) {
+    const body = {
+      _id: id,
+      username: username,
+    };
+    return this.http.post(`${this.uri}/real-estate-accept`, body);
+  }
+
   buy(id: string, username: string) {
     const body = {
       _id: id,
