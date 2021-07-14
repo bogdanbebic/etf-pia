@@ -319,6 +319,30 @@ router.route('/allUsers').post((req, res) => {
 
 // real estate routes
 
+router.route('/real-estate-buy').post((req, res) => {
+    const id = new mongoose.mongo.ObjectId(req.body._id);
+    const username = req.body.username;
+    realEstateModel.collection.updateOne({ _id: id, 'active': true }, { $push: { 'offers': username } });
+    res.json({ ok: true });
+});
+
+router.route('/real-estate-rent').post((req, res) => {
+    const id = new mongoose.mongo.ObjectId(req.body._id);
+    const username = req.body.username;
+    const dateFrom = req.body.dateFrom;
+    const dateTo = req.body.dateTo;
+    const offer = {
+        username: username,
+        dateFrom: dateFrom,
+        dateTo: dateTo,
+    };
+
+    // TODO: check date overlaps
+
+    realEstateModel.collection.updateOne({ _id: id, 'active': true }, { $push: { 'offers': offer } });
+    res.json({ ok: true });
+});
+
 app.post('/real-estate-new', upload.array('file[]'), (req: any, res, next) => {
     const file = req.files;
 
